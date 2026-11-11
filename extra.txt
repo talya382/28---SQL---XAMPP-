@@ -1,0 +1,98 @@
+סך כל ההזמנות שבוצעו:
+
+
+SQL
+SELECT COUNT(*) FROM orders;
+לקוחות הממוקמים בארה"ב:
+
+
+SQL
+SELECT COUNT(*) FROM customers WHERE country = 'USA';
+סכום התשלום הגבוה ביותר שבוצע אי פעם:
+
+
+SQL
+SELECT MAX(amount) FROM payments;
+עובדים עם טייטל תפקיד "Sales Rep":
+
+
+SQL
+SELECT * FROM employees WHERE jobTitle = 'Sales Rep';
+ממוצע מסגרת האשראי של כל הלקוחות:
+
+
+SQL
+SELECT AVG(creditLimit) FROM customers;
+מספר קווי המוצרים השונים:
+
+
+SQL
+SELECT COUNT(*) FROM productlines;
+שמות לקוחות שלא ביצעו אף הזמנה:
+
+
+SQL
+SELECT customerName FROM customers WHERE customerNumber NOT IN (SELECT DISTINCT customerNumber FROM orders);
+סך כמות המוצרים במלאי בכל קווי המוצרים:
+
+
+SQL
+SELECT SUM(quantityInStock) FROM products;
+מוצרים עם מחיר קנייה הגבוה ממאה דולר:
+
+
+SQL
+SELECT productName, buyPrice FROM products WHERE buyPrice > 100;
+עיר המשרד הנמצאת בשימוש התכוף ביותר:
+
+
+SQL
+SELECT o.city, COUNT(e.employeeNumber) as emp_count FROM offices o JOIN employees e ON o.officeCode = e.officeCode GROUP BY o.city ORDER BY emp_count DESC LIMIT 1;
+הזמנות שבוצעו בשנת 2005:
+
+
+SQL
+SELECT * FROM orders WHERE YEAR(orderDate) = 2005;
+לקוחות שביצעו תשלומים מעל 100,000 דולר:
+
+
+SQL
+SELECT DISTINCT c.customerNumber, c.customerName FROM customers c JOIN payments p ON c.customerNumber = p.customerNumber WHERE p.amount > 100000;
+סך כל העובדים לכל משרד:
+
+
+SQL
+SELECT officeCode, COUNT(*) FROM employees GROUP BY officeCode;
+5 הלקוחות המובילים לפי מסגרת אשראי:
+
+
+SQL
+SELECT customerName, creditLimit FROM customers ORDER BY creditLimit DESC LIMIT 5;
+המוצר עם הכמות הגבוה ביותר במלאי:
+
+
+SQL
+SELECT productCode, productName, quantityInStock FROM products ORDER BY quantityInStock DESC LIMIT 1;
+סך הערך של כל התשלומים שהתקבלו:
+
+
+SQL
+SELECT SUM(amount) FROM payments;
+לקוחות ששם פרטי איש הקשר שלהם מתחיל ב-"A":
+
+
+SQL
+SELECT customerName, contactFirstName, contactLastName FROM customers WHERE contactFirstName LIKE 'A%';
+הזמנות שנשלחו לצרפת:
+
+
+SQL
+SELECT o.* FROM orders o JOIN customers c ON o.customerNumber = c.customerNumber WHERE c.country = 'France';
+קוד ושם המוצר הזול ביותר לפי מחיר קנייה:
+
+
+SQL
+SELECT productCode, productName, buyPrice FROM products ORDER BY buyPrice ASC LIMIT 1;
+מספר העובדים המדווחים לכל מנהל:
+SQL
+SELECT reportsTo, COUNT(*) FROM employees GROUP BY reportsTo;
